@@ -8,11 +8,33 @@ public class Booking {
 	private LocalDateTime endDate;
 	
 	// Constructor
-	public Booking(Member m, Facility f, LocalDateTime startDate, LocalDateTime endDate) {
-		this.member = m;
-		this.facility = f;
-		this.startDate = startDate;
-		this.endDate = endDate;
+	public Booking(Member m, Facility f, LocalDateTime startDate, LocalDateTime endDate){
+		try {
+			
+			if(m == null || f == null || startDate == null || endDate == null) {
+				throw new BadBookingException("Bad Booking Exception: Arguments can't be null!");
+			}
+			
+			else if(startDate.isAfter(endDate)) {
+				throw new BadBookingException("Bad Booking Exception: Start date can't end after end date!");
+			}
+			
+			else {
+				this.member = m;
+				this.facility = f;
+				this.startDate = startDate;
+				this.endDate = endDate;
+			}
+		}
+		
+		catch(BadBookingException ex){
+			System.out.println(ex.getMessage());
+		}
+		
+		finally {
+			
+		}
+		
 	}
 	
 	// Getters and Setters
