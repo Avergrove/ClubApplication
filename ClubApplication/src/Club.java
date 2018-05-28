@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -5,16 +6,30 @@ public class Club {
 	private int currentNumber;
 	private ArrayList<Member> members;
 	private HashMap<String, Facility> facilities;
+	private BookingRegister bookingRegister;
+	
 	
 	public Club() {
 		currentNumber = 0;
 		members = new ArrayList<Member>();
 		facilities = new HashMap<String, Facility>();
+		bookingRegister = new BookingRegister();
 	}
 	
 	/*
 	 * Member methods
 	 */
+	
+	// Gets a member by member id
+	public Member getMember(int memberId) {
+		for(Member m : members) {
+			if(m.getMemberNumber() == memberId) {
+				return m;
+			}
+		}
+		
+		return null;
+	}
 	
 	// Adds a member to the club. Don't talk about us on fight club!
 	public Member addMember(String surName, String firstName, String secondName) {
@@ -33,17 +48,9 @@ public class Club {
 	}
 	
 	// Removes a member from the club based on their id.
-	public void removeMember(int id) {
-		
-		boolean removed = false;
-		
-		// Remove corresponding member
-		for(Member m: members) {
-			if(m.memberNumber == id) {
-				members.remove(m);
-			}
-		}
-
+	public void removeMember(int id) {	
+		Member m = this.getMember(id);
+		members.remove(m);
 		
 	}
 	
@@ -72,6 +79,39 @@ public class Club {
 		}
 	}
 	
+	/*
+	 * Booking Methods
+	 */
+	public void addBooking(int memberId, String facilityName, LocalDateTime startDate, LocalDateTime endDate) {
+		// Obtain reference to member and facility
+		Member m = this.getMember(memberId);
+		Facility f = this.getFacility(facilityName);
+		
+		bookingRegister.addBooking(m, f, startDate, endDate);
+		
+	}
+	
+	public ArrayList<Booking> getBookings(String facilityName, LocalDateTime startDate, LocalDateTime endDate) {
+		
+		ArrayList<Booking> returnBookings;
+		
+		Facility f = this.getFacility(facilityName);
+		returnBookings = bookingRegister.getBookings(f, startDate, endDate);
+		
+		return returnBookings;
+	}
+	
+	public void showBookings(String facilityName, LocalDateTime startDate, LocalDateTime endDate) {
+		ArrayList<Booking> returnBookings;
+		
+		Facility f = this.getFacility(facilityName);
+		returnBookings = bookingRegister.getBookings(f, startDate, endDate);	
+		
+		for(Booking b : returnBookings) {
+			b.show();
+		}
+		
+	}
 	
 	/*
 	 * Other methods

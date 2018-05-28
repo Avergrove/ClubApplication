@@ -86,5 +86,7 @@ public class Booking {
 		return String.format("%s, %s, %s, %s", member.toString(), facility.toString(), startDate.toString(), endDate.toString());
 	}
 	
-	
+	public void show() {
+		System.out.println(this.toString());
+	}
 }
