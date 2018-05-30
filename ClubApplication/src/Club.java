@@ -1,5 +1,6 @@
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class Club {
@@ -52,6 +53,10 @@ public class Club {
 		Member m = this.getMember(id);
 		members.remove(m);
 		
+	}
+	
+	public void sortMembers() {
+		Collections.sort(members);
 	}
 	
 	/*

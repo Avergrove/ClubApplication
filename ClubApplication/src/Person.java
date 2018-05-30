@@ -33,5 +33,10 @@ public class Person {
 	public String toString() {
 		return String.format("%s %s %s", firstName, secondName, surName);
 	}
+
+	public int compareTo(Member m) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 }

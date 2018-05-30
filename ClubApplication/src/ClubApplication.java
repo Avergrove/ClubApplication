@@ -40,7 +40,7 @@ public class ClubApplication {
 	    // Check for conflicts
 	    System.out.println("Booking overlaps: " + b1.overlaps(b2));
 	    
-	    // Try making a malformed bookings
+	    // Try making malformed bookings
 	    Booking b3 = new Booking(c.getMembers().get(2), c.getFacility("Badminton Court"), LocalDateTime.now().plusDays(1), LocalDateTime.now());
 	    Booking b4 = new Booking(null, null, null, null);
 	    */
@@ -63,7 +63,9 @@ public class ClubApplication {
 	    System.out.println("The formatted end date is: ");
 	    System.out.println(b1.getEndDate().format(dtf));
 	    
-	    
+	    // Member sort test
+	    c.sortMembers();
+	    c.showMembers();
 	    
 	    
 	}
